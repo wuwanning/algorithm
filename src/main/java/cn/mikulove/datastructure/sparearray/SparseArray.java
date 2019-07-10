@@ -6,13 +6,13 @@ public class SparseArray {
 		int[][] array = new int[9][9];
 		array[3][4] = 1;
 		array[4][4] = 2;
-		array[4][2] = 1;
+		array[4][3] = 1;
 		
 		SparseArray.printArray(array);
 		
 		SparseArray.printArray(SparseArray.normalToSparse(array));
 		
-		
+		SparseArray.printArray(SparseArray.sparseToNormal(SparseArray.normalToSparse(array)));
 	}
 	
 	/**
@@ -22,9 +22,16 @@ public class SparseArray {
 	 */
 	private static int[][] sparseToNormal(int[][] sparseArray){
 		// 1 根据稀疏数组第一行 初始化 普通数组
-		int col = sparseArray[0][0];
-		int row = sparseArray[0][1];
+		int col = sparseArray[0][0]; //列
+		int row = sparseArray[0][1]; //行
 		int[][] array = new int[col][row]; 
+		
+		// 2 遍历稀疏数组 给二维数组赋值
+		for(int a=1;a<sparseArray.length;a++ ){
+			int[] arr = sparseArray[a];
+			array[arr[0]][arr[1]]=arr[2];
+		}
+		
 		return array;
 	}
 	
